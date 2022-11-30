@@ -1,5 +1,5 @@
 from rest_framework.generics import CreateAPIView
-from .serializers import UserCreateSerializer, UserLoginSerializer
+from .serializers import  UserCreateSerializer, UserLoginSerializer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
@@ -18,3 +18,4 @@ class UserLoginAPIView(APIView):
             valid_data = serializer.data
             return Response(valid_data, status=HTTP_200_OK)
         return Response(serializer.errors, HTTP_400_BAD_REQUEST)
+
