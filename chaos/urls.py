@@ -17,8 +17,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-
 from user.views import UserCreateAPIView, UserLoginAPIView
+from recipes.views import CategoryView, CategoryCreateView,RecipeView,RecipeCreateView, RecipeDeleteView,RecipeUpdateView
 
 
 
@@ -26,6 +26,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', UserCreateAPIView.as_view(), name='register'),
     path('login/', UserLoginAPIView.as_view(), name='login'),
+    path('category/', CategoryView.as_view(), name='category-list'),
+    path('category/create/', CategoryCreateView.as_view(), name='create-category'),
+    path('recipe/', RecipeView.as_view(), name='recipe-list'),
+    path('recipe/create/', RecipeCreateView.as_view(), name='create-recipe'),
+    path('recipe/delete/<int:recipe_id>/', RecipeDeleteView.as_view(), name='delete-recipe'),
+    path('recipe/edit/<int:recipe_id>/', RecipeUpdateView.as_view(), name='edit-recipe'),
 ]
 
 
