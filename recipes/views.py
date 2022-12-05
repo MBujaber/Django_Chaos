@@ -24,6 +24,12 @@ class RecipeView(ListAPIView):
     serializer_class = RecipeListSerializer
     permission_classes = [AllowAny]
 
+class MyRecipeView(ListAPIView):
+    serializer_class = RecipeListSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+            return Recipe.objects.filter(user=self.request.user)
 
 
 class RecipeCreateView(CreateAPIView):

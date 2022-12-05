@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from user.views import UserCreateAPIView, UserLoginAPIView
-from recipes.views import CategoryView, CategoryCreateView,RecipeView,RecipeCreateView, RecipeDeleteView,RecipeUpdateView
+from recipes.views import CategoryView, CategoryCreateView, MyRecipeView,RecipeView,RecipeCreateView, RecipeDeleteView,RecipeUpdateView
 
 
 
@@ -32,6 +32,7 @@ urlpatterns = [
     path('recipe/create/', RecipeCreateView.as_view(), name='create-recipe'),
     path('recipe/delete/<int:recipe_id>/', RecipeDeleteView.as_view(), name='delete-recipe'),
     path('recipe/edit/<int:recipe_id>/', RecipeUpdateView.as_view(), name='edit-recipe'),
+    path('myrecipe/', MyRecipeView.as_view(), name='my_recipe_list'),
 ]
 
 
