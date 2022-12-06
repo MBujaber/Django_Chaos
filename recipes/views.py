@@ -44,7 +44,7 @@ class RecipeDeleteView(DestroyAPIView):
     serializer_class = RecipeListSerializer 
     lookup_field = 'id'
     lookup_url_kwarg = 'recipe_id'
-    permission_classes = [IsAuthenticated, IsAdminUser]    
+    permission_classes = [IsAuthenticated]    
 
 
 class RecipeUpdateView(UpdateAPIView):

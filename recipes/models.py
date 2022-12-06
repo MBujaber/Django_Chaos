@@ -9,7 +9,7 @@ class Category(models.Model):
     image = models.ImageField(upload_to="media/")
 
     def __str__(self):
-        return self.title
+        return f"{self.id}: {self.title}"
 
 class Ingredient(models.Model):
    name = models.CharField(max_length=100)

@@ -18,14 +18,14 @@ class CategoryCreateSerializer(serializers.ModelSerializer):
 class RecipeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
-        fields = ['ingredient', 'title', "user",'image', "category"]
+        fields = ["id",'ingredient', 'title', "user",'image', "category"]
 
 
 class RecipeCreateSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Recipe
-        fields = ['ingredient','title', "user",'image', "category"]
+        fields = ['ingredient','title', "user", "category",'image']
 
 class RecipeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
