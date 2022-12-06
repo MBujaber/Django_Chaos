@@ -1,19 +1,19 @@
 from .models import Category,Recipe
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
-from .serializers import CategoryCreateSerializer, CategoryListSerializer,RecipeListSerializer,RecipeCreateSerializer,RecipeUpdateSerializer
+from .serializers import  CategorySerializer, RecipeSerializer,RecipeUpdateSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 
 
 class CategoryView(ListAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategoryListSerializer
+    serializer_class = CategorySerializer
     permission_classes = [AllowAny]
 
 
 class CategoryCreateView(CreateAPIView):
-    serializer_class = CategoryCreateSerializer
-    permission_classes = [IsAdminUser]
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -21,11 +21,11 @@ class CategoryCreateView(CreateAPIView):
 
 class RecipeView(ListAPIView):
     queryset = Recipe.objects.all()
-    serializer_class = RecipeListSerializer
+    serializer_class = RecipeSerializer
     permission_classes = [AllowAny]
 
 class MyRecipeView(ListAPIView):
-    serializer_class = RecipeListSerializer
+    serializer_class = RecipeSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
@@ -33,7 +33,7 @@ class MyRecipeView(ListAPIView):
 
 
 class RecipeCreateView(CreateAPIView):
-    serializer_class = RecipeCreateSerializer
+    serializer_class = RecipeSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -41,7 +41,7 @@ class RecipeCreateView(CreateAPIView):
 
 class RecipeDeleteView(DestroyAPIView):
     queryset = Recipe.objects.all()
-    serializer_class = RecipeListSerializer 
+    serializer_class = RecipeSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'recipe_id'
     permission_classes = [IsAuthenticated]    
@@ -52,4 +52,4 @@ class RecipeUpdateView(UpdateAPIView):
     serializer_class = RecipeUpdateSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'recipe_id'
-    permission_classes = [IsAuthenticated, IsAdminUser]    
+    permission_classes = [IsAuthenticated]    
