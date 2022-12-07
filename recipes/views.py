@@ -1,6 +1,6 @@
-from .models import Category,Recipe
+from .models import Category,Recipe, Ingredient
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
-from .serializers import  CategorySerializer, RecipeSerializer,RecipeUpdateSerializer
+from .serializers import  CategorySerializer, IngredientSerializer, RecipeSerializer,RecipeUpdateSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 
@@ -52,4 +52,17 @@ class RecipeUpdateView(UpdateAPIView):
     serializer_class = RecipeUpdateSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'recipe_id'
-    permission_classes = [IsAuthenticated]    
+    permission_classes = [IsAuthenticated]
+
+
+class IngredientView(ListAPIView):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+    permission_classes = [AllowAny]
+
+class IngredientCreateView(CreateAPIView):
+    serializer_class = IngredientSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)    
