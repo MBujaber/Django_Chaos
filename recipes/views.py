@@ -3,6 +3,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView,
 from .serializers import  CategorySerializer, IngredientSerializer, RecipeSerializer,RecipeUpdateSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from .permissions import IsCreator
 
 
 class CategoryView(ListAPIView):
@@ -44,7 +45,7 @@ class RecipeDeleteView(DestroyAPIView):
     serializer_class = RecipeSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'recipe_id'
-    permission_classes = [IsAuthenticated]    
+    permission_classes = [IsCreator]    
 
 
 class RecipeUpdateView(UpdateAPIView):
@@ -52,7 +53,7 @@ class RecipeUpdateView(UpdateAPIView):
     serializer_class = RecipeUpdateSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'recipe_id'
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsCreator]
 
 
 class IngredientView(ListAPIView):
