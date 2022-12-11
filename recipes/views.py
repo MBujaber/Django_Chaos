@@ -5,7 +5,6 @@ from .serializers import  CategorySerializer, IngredientSerializer, RecipeSerial
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .permissions import IsCreator
-from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 
 class CategoryView(ListAPIView):
@@ -37,13 +36,6 @@ class MyRecipeView(ListAPIView):
     def get_queryset(self):
             return Recipe.objects.filter(user=self.request.user)
             
-class RecipeCategoryView(generics.ListAPIView):
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['category']
-
-
         
 
 class RecipeCreateView(CreateAPIView):
